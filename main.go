@@ -12,6 +12,8 @@ func init() {
 }
 
 func main() {
+	// 设置静态文件
+	beego.SetStaticPath("/static","static")
 	orm.Debug = true
 	_ = orm.RunSyncdb("default", false, true)
 	beego.Run()

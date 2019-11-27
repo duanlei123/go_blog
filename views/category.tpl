@@ -11,13 +11,12 @@
 
     <div class="container">
         <h1>分类列表</h1>
-        <form method="post" action="/category">
+        <form method="post" action="/category" class="form-inline">
             <div class="form-group">
-                <label>分类名称</label>
                 <input id="name" type="text" class="form-control" placeholder="例如:Goland入门第一篇" name="name">
             </div>
             <input type="hidden" name="op" value="add">
-            <button type="submit" class="btn btn-default" onclick="return checkInput()">添加</button>
+            <button type="submit" class="btn btn-primary" onclick="return checkInput()">添加分类</button>
         </form>
         <script type="text/javascript">
             function checkInput() {

@@ -8,12 +8,25 @@
         </div>
     </vav>
     <div class="container">
-        <div class="page-header">
-            <h1>我的第一篇博客</h1>
-            <h6 class="text-muted">文章发表于 2019 年 X 月 X 日 xx:xx,共有 100 次浏览,200 个评论</h6>
-            <p>
-                大家好, 这是我的第一篇博客, 多谢观看
-            </p>
+        <div class="col-md-9">
+            {{range .Topics}}
+                <div class="page-header">
+                    <h1><a href="/topic/view/{{.Id}}">{{.Title}}</a></h1>
+                    <h6 class="text-muted">文章发表于 {{.Created}},共有 {{.Views}} 次浏览,{{.ReplyCount}}个评论</h6>
+                    <p>
+                        {{.Content}}
+                    </p>
+                </div>
+            {{end}}
+        </div>
+
+        <div class="col-md-3">
+            <h3>文章分类</h3>
+            <ul class="list-group">
+               {{range .Categories}}
+                   <li class="list-group-item"><a href="/?cate={{.Title}}">{{.Title}}</a></li>
+               {{end}}
+            </ul>
         </div>
     </div>
 </body>
