@@ -18,6 +18,7 @@
                 {{end}}
             </h5>
             <p>{{.Content}}</p>
+            <h5>文章附件:<a href="/attachment/{{.Attachment}}">{{.Attachment}}</a></h5>
         {{end}}
     </div>
 

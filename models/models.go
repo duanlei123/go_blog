@@ -104,7 +104,7 @@ func DelCategory(id string) error {
 }
 
 // 添加文章
-func AddTopic(title,category, label, content string) error{
+func AddTopic(title,category, label, content,attachment string) error{
 	// 处理标签
 	label = "$" + strings.Join(strings.Split(label," "), "#$") + "#"
 
@@ -114,7 +114,7 @@ func AddTopic(title,category, label, content string) error{
 		Category:		 category,
 		Labels:			 label,
 		Content:         content,
-		Attachment:      "",
+		Attachment:      attachment,
 		Created:         time.Now(),
 		Updated:         time.Now(),
 		Views:           0,
@@ -178,19 +178,21 @@ func GetTopic(tid string) (*Topic, error){
 }
 
 // 修改文章
-func ModelsTopic(tid, title, category, label, content string) error{
+func ModelsTopic(tid, title, category, label, content, attachment string) error{
 	label = "$" + strings.Join(strings.Split(label," "), "#$") + "#"
 	tidNum, err := strconv.ParseInt(tid, 10, 64)
 	if err != nil{
 		return err
 	}
-	var oldCate string // 文章之前的分类
+	var oldCate, oldAttach string // 文章之前的分类
 	o := orm.NewOrm()
 	topic := &Topic{Id:tidNum}
 	if o.Read(topic) == nil{
 		oldCate = topic.Category
+		oldAttach = topic.Attachment
 		topic.Title = title
 		topic.Content = content
+		topic.Attachment = attachment
 		topic.Labels = label
 		topic.Category = category
 		topic.Updated = time.Now()
@@ -208,6 +210,10 @@ func ModelsTopic(tid, title, category, label, content string) error{
 			category.TopicCount--
 			_, err = o.Update(category)
 		}
+	}
+	// 删除旧附件
+	if len(oldAttach) > 0{
+		os.Remove(path.Join("attachment",oldAttach))
 	}
 	cate := new(Category)
 	qs := o.QueryTable("category")

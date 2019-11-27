@@ -1,0 +1,9 @@
+1、sunfire/alimonitor配置，尤其GOC的监控项
+2、TT日志收容是否配置pouch应用
+3、yuri监控是否新增pouch应用
+4、单机限流是否新增pouch应用
+5、新单元标(unsh/unsz/center)对业务是否有影响
+6、运维规范检查，不要等切流后再返工
+7、diamond、scm配置是否下发到全机房
+8、依赖服务、中间件是否有张北机房
+9、切流计划步骤
